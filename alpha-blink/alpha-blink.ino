@@ -15,8 +15,8 @@ int col4 = D3;
 int col5 = D4;
 int col6 = D5;
 int col7 = D6;
-int col8 = D7;
-int col9 = D8;
+int col8 = A4;
+int col9 = D7;
 
 
 //int spellIt(String command);
@@ -37,6 +37,7 @@ void setup() {
   pinMode(col8, OUTPUT);
   pinMode(col9, OUTPUT);
   
+  
   digitalWrite(row1, HIGH);
   digitalWrite(row2, HIGH);
   digitalWrite(row3, HIGH);
@@ -49,6 +50,7 @@ void setup() {
   digitalWrite(col7, LOW);
   digitalWrite(col8, LOW);
   digitalWrite(col9, LOW);
+  
 
   Particle.function("enter_letter", parseIt);
 
