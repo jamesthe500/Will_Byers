@@ -62,44 +62,76 @@ void loop() {
 }
 
 int parseIt(String letters){
+  if(letters == "run") {
+    for (unsigned int i = 0; i < letters.length(); i++){
+        signed char thisLetter = letters[i];
+        //String thisLetter = letters.charAt(i);
+        //spellIt(letters.charAt(i));
+        spellIt(thisLetter, 800, 100);
+    }
+    unsigned int j = 97;
+    for (unsigned int i = 0; i < 5200; i++){
+      spellIt(j, 1, 0);
+      j++;
+      if (j == 123) {
+        j = 97;
+      }
+    }
+
+    return 1;
+  }
+  
+  if (letters == "st"){
+      letters = "stranger things";
+  }
+    if (letters == "wb"){
+      letters = "will beyers";
+  }
+    if (letters == "rh"){
+      letters = "right here";
+  }
+  
     
     for (unsigned int i = 0; i < letters.length(); i++){
         signed char thisLetter = letters[i];
         //String thisLetter = letters.charAt(i);
         //spellIt(letters.charAt(i));
-        spellIt(thisLetter);
+        spellIt(thisLetter, 800, 100);
     
     
     }
     return 1;
 }
 
-int spellIt(signed char letter){
+int spellIt(signed char letter, unsigned int duration, unsigned int wait){
   // a
   if(letter == 97){
     digitalWrite(row1, LOW);
     digitalWrite(col2, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col2, LOW);
+    delay(wait);
     return 1;
   }
   // b
   if(letter == 98){
     digitalWrite(row1, LOW);
     digitalWrite(col3, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col3, LOW);
+    delay(wait);
     return 1;
   }
   // c
   if(letter == 99){
     digitalWrite(row1, LOW);
     digitalWrite(col4, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col4, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -107,9 +139,10 @@ int spellIt(signed char letter){
   if(letter == 100){
     digitalWrite(row1, LOW);
     digitalWrite(col5, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col5, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -117,9 +150,10 @@ int spellIt(signed char letter){
   if(letter == 101){
     digitalWrite(row1, LOW);
     digitalWrite(col6, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col6, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -127,9 +161,10 @@ int spellIt(signed char letter){
   if(letter == 102){
     digitalWrite(row1, LOW);
     digitalWrite(col7, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col7, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -137,9 +172,10 @@ int spellIt(signed char letter){
   if(letter == 103){
     digitalWrite(row1, LOW);
     digitalWrite(col8, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col8, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -147,9 +183,10 @@ int spellIt(signed char letter){
   if(letter == 104){
     digitalWrite(row1, LOW);
     digitalWrite(col9, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col9, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -157,9 +194,10 @@ int spellIt(signed char letter){
   if(letter == 105){
     digitalWrite(row2, LOW);
     digitalWrite(col1, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col1, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -167,9 +205,10 @@ int spellIt(signed char letter){
   if(letter == 106){
     digitalWrite(row2, LOW);
     digitalWrite(col2, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col2, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -177,9 +216,10 @@ int spellIt(signed char letter){
   if(letter == 107){
     digitalWrite(row2, LOW);
     digitalWrite(col3, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col3, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -187,9 +227,10 @@ int spellIt(signed char letter){
   if(letter == 108){
     digitalWrite(row2, LOW);
     digitalWrite(col4, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col4, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -197,9 +238,10 @@ int spellIt(signed char letter){
   if(letter == 109){
     digitalWrite(row2, LOW);
     digitalWrite(col5, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col5, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -207,9 +249,10 @@ int spellIt(signed char letter){
   if(letter == 110){
     digitalWrite(row2, LOW);
     digitalWrite(col6, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col6, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -217,9 +260,10 @@ int spellIt(signed char letter){
   if(letter == 111){
     digitalWrite(row2, LOW);
     digitalWrite(col7, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col7, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -227,9 +271,10 @@ int spellIt(signed char letter){
   if(letter == 112){
     digitalWrite(row2, LOW);
     digitalWrite(col8, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col8, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -237,9 +282,10 @@ int spellIt(signed char letter){
   if(letter == 113){
     digitalWrite(row2, LOW);
     digitalWrite(col9, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col9, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -247,9 +293,10 @@ int spellIt(signed char letter){
   if(letter == 114){
     digitalWrite(row3, LOW);
     digitalWrite(col1, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col1, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -257,9 +304,10 @@ int spellIt(signed char letter){
   if(letter == 115){
     digitalWrite(row3, LOW);
     digitalWrite(col2, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col2, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -267,9 +315,10 @@ int spellIt(signed char letter){
   if(letter == 116){
     digitalWrite(row3, LOW);
     digitalWrite(col3, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col3, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -277,9 +326,10 @@ int spellIt(signed char letter){
   if(letter == 117){
     digitalWrite(row3, LOW);
     digitalWrite(col4, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col4, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -287,9 +337,10 @@ int spellIt(signed char letter){
   if(letter == 118){
     digitalWrite(row3, LOW);
     digitalWrite(col5, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col5, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -297,9 +348,10 @@ int spellIt(signed char letter){
   if(letter == 119){
     digitalWrite(row3, LOW);
     digitalWrite(col6, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col6, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -307,9 +359,10 @@ int spellIt(signed char letter){
   if(letter == 120){
     digitalWrite(row3, LOW);
     digitalWrite(col7, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col7, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -317,9 +370,10 @@ int spellIt(signed char letter){
   if(letter == 121){
     digitalWrite(row3, LOW);
     digitalWrite(col8, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col8, LOW);
+    delay(wait);
     return 1;
   }
 
@@ -327,16 +381,17 @@ int spellIt(signed char letter){
   if(letter == 122){
     digitalWrite(row3, LOW);
     digitalWrite(col9, HIGH);
-    delay(1000);
+    delay(duration);
     digitalWrite(row3, HIGH);
     digitalWrite(col9, LOW);
+    delay(wait);
     return 1;
   }
 
   // (space)
   if(letter == 32){
     
-    delay(1500);
+    delay(duration);
     return 1;
   }
 
