@@ -67,6 +67,15 @@ void loop() {
    
 }
 
+/* 
+function needs to make lights dimmaable. 
+take a var 1-10 for percentage of power.
+take a row and col so it knows what to target
+take a duration?
+Set an intensity var outside that is reused. Some lights might need that adjusted w/min of 1 and max of 9
+
+*/
+
 int parseIt(String letters){
   if(letters == "run") {
     for (unsigned int i = 0; i < letters.length(); i++){
@@ -132,12 +141,14 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
   }
   // c
   if(letter == 99 || letter == 67){
+      for (int i=0; i<1000; i++){
     digitalWrite(row1, LOW);
     digitalWrite(col4, HIGH);
-    delay(duration);
+    delayMicroseconds(100);
     digitalWrite(row1, HIGH);
     digitalWrite(col4, LOW);
-    delay(wait);
+    delayMicroseconds(1900);
+      }
     return 1;
   }
 
@@ -209,12 +220,14 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
 
   // j
   if(letter == 106 || letter == 74){
-    digitalWrite(row2, LOW);
+    for (int i=0; i<1000; i++){
+        digitalWrite(row2, LOW);
     digitalWrite(col2, HIGH);
-    delay(duration);
+    delayMicroseconds(1);
     digitalWrite(row2, HIGH);
     digitalWrite(col2, LOW);
-    delay(wait);
+    delayMicroseconds(1999);
+    }
     return 1;
   }
 
@@ -253,12 +266,14 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
 
   // n
   if(letter == 110 || letter == 78){
+      for (int i=0; i<1000; i++){
     digitalWrite(row2, LOW);
     digitalWrite(col6, HIGH);
-    delay(duration);
+    delayMicroseconds(10);
     digitalWrite(row2, HIGH);
     digitalWrite(col6, LOW);
-    delay(wait);
+    delayMicroseconds(1990);
+      }
     return 1;
   }
 
