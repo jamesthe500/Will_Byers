@@ -1,15 +1,15 @@
-#include <string>
-// led long poles got to columns
+#include <string.h>
+// led long poles go to columns
 // led short poles to rows
 
-int row1 = A0;
-int row2 = A1;
-int row3 = A2;
+int row1 = D0;
+int row2 = D2;
+int row3 = D3;
 
-int col1 = D0;
+int col1 = A0;
 int col2 = D1;
-int col3 = D2;
-int col4 = D3;
+int col3 = A1;
+int col4 = A2;
 int col5 = D4;
 int col6 = D5;
 int col7 = D6;
@@ -63,21 +63,24 @@ void loop() {
     It should loop indefinitely.
     
  */
-   
+    
+    // up to 3 lights on at a time
+    // variable for light timing 1,2,3
+    // var for coordinates of 1,2,3
+    
+    // ON section
+    // a light# timer is set to millis() + duration
+    // the row and column are activated
+    
+    // OFF section
+    // if light 1 (2,3) are equal or beyond their end
+    // the row and column are deactivated
+    
    
 }
 
-/* 
-function needs to make lights dimmaable. 
-take a var 1-10 for percentage of power.
-take a row and col so it knows what to target
-take a duration?
-Set an intensity var outside that is reused. Some lights might need that adjusted w/min of 1 and max of 9
-
-*/
-
 int parseIt(String letters){
-  if(letters == "run") {
+    if(letters == "run") {
     for (unsigned int i = 0; i < letters.length(); i++){
         signed char thisLetter = letters[i];
         //String thisLetter = letters.charAt(i);
@@ -94,9 +97,9 @@ int parseIt(String letters){
     }
 
     return 1;
-  }
+    }
   
-  if (letters == "st"){
+    if (letters == "st"){
       letters = "stranger things";
   }
     if (letters == "wb"){
@@ -112,13 +115,34 @@ int parseIt(String letters){
         //String thisLetter = letters.charAt(i);
         //spellIt(letters.charAt(i));
         spellIt(thisLetter, 800, 100);
-    
-    
     }
     return 1;
 }
 
 int spellIt(signed char letter, unsigned int duration, unsigned int wait){
+    
+    // for a string that's received,
+    // strip it of non alpha characters?
+    // count the characters
+    // somehow it needs to time the sending of each letter...
+    // the string is stored in a var 
+    // so is the wait duration
+    // another var for the "first"
+    // the first letter is popped off and ignited
+    // in the off condition, it calls this function again, sets "first" to false and sets a timer for the on condition.
+    // there will have to be an "on" var for each of the three lights, so we know whether it's waiting to be on or off.
+    // also in the off condition is setting the light timer to 0.
+    
+    // Somewhere in the calling, it should try to claim light 1, 2, then 3. Looking for a 0 value. This wouldn't apply for strings, only push buttons.
+    // If all three are taken, it just ignores that command? This seems problematic.
+    
+    // touchscreen would be like a momentary switch, so no timer. It just turns it on. When it hears a "finger release" it turns it off.
+    
+    // Can there be an object so if strings are received while one string is running, they can be spooled up?
+    
+    // put the index of letters in a different function?
+    // so it can be used by a push button function?
+    
   // a
   if(letter == 97 || letter == 65){
     digitalWrite(row1, LOW);
@@ -141,14 +165,12 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
   }
   // c
   if(letter == 99 || letter == 67){
-      for (int i=0; i<1000; i++){
     digitalWrite(row1, LOW);
     digitalWrite(col4, HIGH);
-    delayMicroseconds(100);
+    delay(duration);
     digitalWrite(row1, HIGH);
     digitalWrite(col4, LOW);
-    delayMicroseconds(1900);
-      }
+    delay(wait);
     return 1;
   }
 
@@ -220,14 +242,12 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
 
   // j
   if(letter == 106 || letter == 74){
-    for (int i=0; i<1000; i++){
-        digitalWrite(row2, LOW);
+    digitalWrite(row2, LOW);
     digitalWrite(col2, HIGH);
-    delayMicroseconds(1);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col2, LOW);
-    delayMicroseconds(1999);
-    }
+    delay(wait);
     return 1;
   }
 
@@ -266,14 +286,12 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
 
   // n
   if(letter == 110 || letter == 78){
-      for (int i=0; i<1000; i++){
     digitalWrite(row2, LOW);
     digitalWrite(col6, HIGH);
-    delayMicroseconds(10);
+    delay(duration);
     digitalWrite(row2, HIGH);
     digitalWrite(col6, LOW);
-    delayMicroseconds(1990);
-      }
+    delay(wait);
     return 1;
   }
 
@@ -417,4 +435,3 @@ int spellIt(signed char letter, unsigned int duration, unsigned int wait){
   }
 
 }
-
