@@ -1,5 +1,5 @@
 #include <string.h>
-// led long poles go to columns
+// led long poles got to columns
 // led short poles to rows
 
 int row1 = D0;
@@ -51,6 +51,8 @@ void setup() {
   
 
   Particle.function("enter_letter", parseIt);
+  Particle.function("letter_on", letterOn);
+  Particle.function("letter_off", letterOff);
 
 }
 
@@ -63,24 +65,20 @@ void loop() {
     It should loop indefinitely.
     
  */
-    
-    // up to 3 lights on at a time
-    // variable for light timing 1,2,3
-    // var for coordinates of 1,2,3
-    
-    // ON section
-    // a light# timer is set to millis() + duration
-    // the row and column are activated
-    
-    // OFF section
-    // if light 1 (2,3) are equal or beyond their end
-    // the row and column are deactivated
-    
+   
    
 }
 
 int parseIt(String letters){
-    if(letters == "run") {
+    /* for testing
+    if(letters == "a"){
+        letterOff("a");
+        return 1;
+    } else if (letters == "A") {
+        letterOn("A");
+        return 1;
+    }*/
+  if(letters == "run" || letters == "Run") {
     for (unsigned int i = 0; i < letters.length(); i++){
         signed char thisLetter = letters[i];
         //String thisLetter = letters.charAt(i);
@@ -97,9 +95,9 @@ int parseIt(String letters){
     }
 
     return 1;
-    }
+  }
   
-    if (letters == "st"){
+  if (letters == "st"){
       letters = "stranger things";
   }
     if (letters == "wb"){
@@ -120,318 +118,144 @@ int parseIt(String letters){
 }
 
 int spellIt(signed char letter, unsigned int duration, unsigned int wait){
-    
-    // for a string that's received,
-    // strip it of non alpha characters?
-    // count the characters
-    // somehow it needs to time the sending of each letter...
-    // the string is stored in a var 
-    // so is the wait duration
-    // another var for the "first"
-    // the first letter is popped off and ignited
-    // in the off condition, it calls this function again, sets "first" to false and sets a timer for the on condition.
-    // there will have to be an "on" var for each of the three lights, so we know whether it's waiting to be on or off.
-    // also in the off condition is setting the light timer to 0.
-    
-    // Somewhere in the calling, it should try to claim light 1, 2, then 3. Looking for a 0 value. This wouldn't apply for strings, only push buttons.
-    // If all three are taken, it just ignores that command? This seems problematic.
-    
-    // touchscreen would be like a momentary switch, so no timer. It just turns it on. When it hears a "finger release" it turns it off.
-    
-    // Can there be an object so if strings are received while one string is running, they can be spooled up?
-    
-    // put the index of letters in a different function?
-    // so it can be used by a push button function?
-    
+     // (space)
+    if(letter == 32){
+        delay(duration);
+        return 1;
+    } else {
+        letterIndex(letter, true);
+        delay(duration);
+        letterIndex(letter, false);
+        delay(wait);
+        return 1;
+    }
+}
+
+int letterOn(String letter){
+    signed char thisLetter = letter[0];
+    letterIndex(thisLetter, true);
+    return 1;
+}
+
+int letterOff(String letter){
+    signed char thisLetter = letter[0];
+    letterIndex(thisLetter, false);
+    return 1;
+}
+
+void letterTraffic(uint16_t rowNum, uint16_t colNum, bool makeOn){
+    if(makeOn){
+        digitalWrite(rowNum, LOW);
+        digitalWrite(colNum, HIGH);
+    } else {
+        digitalWrite(rowNum, HIGH);
+        digitalWrite(colNum, LOW);
+    }
+}
+
+void letterIndex(signed char letter, bool makeOn){
   // a
   if(letter == 97 || letter == 65){
-    digitalWrite(row1, LOW);
-    digitalWrite(col2, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col2, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col2, makeOn);
   }
   // b
   if(letter == 98 || letter == 66){
-    digitalWrite(row1, LOW);
-    digitalWrite(col3, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col3, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col3, makeOn);
   }
   // c
   if(letter == 99 || letter == 67){
-    digitalWrite(row1, LOW);
-    digitalWrite(col4, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col4, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col4, makeOn);
   }
-
   // d
   if(letter == 100 || letter == 68){
-    digitalWrite(row1, LOW);
-    digitalWrite(col5, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col5, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col5, makeOn);
   }
-
   // e
   if(letter == 101 || letter == 69){
-    digitalWrite(row1, LOW);
-    digitalWrite(col6, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col6, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col6, makeOn);
   }
-
   // f
   if(letter == 102 || letter == 70){
-    digitalWrite(row1, LOW);
-    digitalWrite(col7, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col7, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col7, makeOn);
   }
-
   // g
   if(letter == 103 || letter == 71){
-    digitalWrite(row1, LOW);
-    digitalWrite(col8, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col8, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col8, makeOn);
   }
-
   // h
   if(letter == 104 || letter == 72){
-    digitalWrite(row1, LOW);
-    digitalWrite(col9, HIGH);
-    delay(duration);
-    digitalWrite(row1, HIGH);
-    digitalWrite(col9, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row1, col9, makeOn);
   }
-
   // i
   if(letter == 105 || letter == 73){
-    digitalWrite(row2, LOW);
-    digitalWrite(col1, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col1, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col1, makeOn);
   }
-
   // j
   if(letter == 106 || letter == 74){
-    digitalWrite(row2, LOW);
-    digitalWrite(col2, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col2, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col2, makeOn);
   }
-
   // k
   if(letter == 107 || letter == 75){
-    digitalWrite(row2, LOW);
-    digitalWrite(col3, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col3, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col3, makeOn);
   }
-
   // l
   if(letter == 108 || letter == 76){
-    digitalWrite(row2, LOW);
-    digitalWrite(col4, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col4, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col4, makeOn);
   }
-
   // m
   if(letter == 109 || letter == 77){
-    digitalWrite(row2, LOW);
-    digitalWrite(col5, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col5, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col5, makeOn);
   }
-
   // n
   if(letter == 110 || letter == 78){
-    digitalWrite(row2, LOW);
-    digitalWrite(col6, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col6, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col6, makeOn);
   }
-
   // o
   if(letter == 111 || letter == 79){
-    digitalWrite(row2, LOW);
-    digitalWrite(col7, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col7, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col7, makeOn);
   }
-
   // p
   if(letter == 112 || letter == 80){
-    digitalWrite(row2, LOW);
-    digitalWrite(col8, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col8, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col8, makeOn);
   }
-
   // q
   if(letter == 113 || letter == 81){
-    digitalWrite(row2, LOW);
-    digitalWrite(col9, HIGH);
-    delay(duration);
-    digitalWrite(row2, HIGH);
-    digitalWrite(col9, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row2, col9, makeOn);
   }
-
   // r
   if(letter == 114 || letter == 82){
-    digitalWrite(row3, LOW);
-    digitalWrite(col1, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col1, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col1, makeOn);
   }
-
   // s
   if(letter == 115 || letter == 83){
-    digitalWrite(row3, LOW);
-    digitalWrite(col2, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col2, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col3, makeOn);
   }
-
   // t
   if(letter == 116 || letter == 84){
-    digitalWrite(row3, LOW);
-    digitalWrite(col3, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col3, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col3, makeOn);
   }
-
   // u
   if(letter == 117 || letter == 85){
-    digitalWrite(row3, LOW);
-    digitalWrite(col4, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col4, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col4, makeOn);
   }
-
   // v
   if(letter == 118 || letter == 86){
-    digitalWrite(row3, LOW);
-    digitalWrite(col5, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col5, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col5, makeOn);
   }
-
   // w
   if(letter == 119 || letter == 87){
-    digitalWrite(row3, LOW);
-    digitalWrite(col6, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col6, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col6, makeOn);
   }
-
   // x
   if(letter == 120 || letter == 88){
-    digitalWrite(row3, LOW);
-    digitalWrite(col7, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col7, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col7, makeOn);
   }
-
   // y
   if(letter == 121 || letter == 89){
-    digitalWrite(row3, LOW);
-    digitalWrite(col8, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col8, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col8, makeOn);
   }
-
   // z
   if(letter == 122 || letter == 90){
-    digitalWrite(row3, LOW);
-    digitalWrite(col9, HIGH);
-    delay(duration);
-    digitalWrite(row3, HIGH);
-    digitalWrite(col9, LOW);
-    delay(wait);
-    return 1;
+    letterTraffic(row3, col9, makeOn);
   }
-
-  // (space)
-  if(letter == 32){
-    
-    delay(duration);
-    return 1;
-  }
-
 }
