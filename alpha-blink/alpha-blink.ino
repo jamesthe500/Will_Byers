@@ -70,14 +70,9 @@ void loop() {
 }
 
 int parseIt(String letters){
-    /* for testing
-    if(letters == "a"){
-        letterOff("a");
-        return 1;
-    } else if (letters == "A") {
-        letterOn("A");
-        return 1;
-    }*/
+    
+    
+    
   if(letters == "run" || letters == "Run") {
     for (unsigned int i = 0; i < letters.length(); i++){
         signed char thisLetter = letters[i];
@@ -107,7 +102,9 @@ int parseIt(String letters){
       letters = "right here";
   }
   
-    
+    // flickers the red light as a signal that a message is coming.
+    flickLight(row1, col1);
+     
     for (unsigned int i = 0; i < letters.length(); i++){
         signed char thisLetter = letters[i];
         //String thisLetter = letters.charAt(i);
@@ -115,6 +112,42 @@ int parseIt(String letters){
         spellIt(thisLetter, 800, 100);
     }
     return 1;
+}
+
+void flickLight(uint16_t rowNum, uint16_t colNum){
+    int maxD = 300;
+    int incr = 80;
+    
+    int small = 1;
+    //on
+    digitalWrite(rowNum, LOW);
+    digitalWrite(colNum, HIGH);
+    
+    for(int i = maxD; i > 0; i = i - incr){
+        delay(rand() %small);
+        //off
+        digitalWrite(rowNum, HIGH);
+        digitalWrite(colNum, LOW);
+        delay(rand() %i);
+        //on
+        digitalWrite(rowNum, LOW);
+        digitalWrite(colNum, HIGH);
+        small = small + incr;
+    }
+    delay(400);
+     int large = maxD;
+    for(int j = 1; j < maxD; j = j + incr){
+        delay(rand() %j);
+        //off
+        digitalWrite(rowNum, LOW);
+        digitalWrite(colNum, HIGH);
+        delay(rand() %large);
+        //on
+        digitalWrite(rowNum, HIGH);
+        digitalWrite(colNum, LOW);
+        large = large - incr;
+    }
+   delay(600);
 }
 
 int spellIt(signed char letter, unsigned int duration, unsigned int wait){
@@ -228,7 +261,7 @@ void letterIndex(signed char letter, bool makeOn){
   }
   // s
   if(letter == 115 || letter == 83){
-    letterTraffic(row3, col3, makeOn);
+    letterTraffic(row3, col2, makeOn);
   }
   // t
   if(letter == 116 || letter == 84){
