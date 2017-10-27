@@ -70,9 +70,6 @@ void loop() {
 }
 
 int parseIt(String letters){
-    
-    
-    
   if(letters == "run" || letters == "Run") {
     for (unsigned int i = 0; i < letters.length(); i++){
         signed char thisLetter = letters[i];
@@ -109,7 +106,7 @@ int parseIt(String letters){
         signed char thisLetter = letters[i];
         //String thisLetter = letters.charAt(i);
         //spellIt(letters.charAt(i));
-        spellIt(thisLetter, 800, 100);
+        spellIt(thisLetter, 400 + rand() %400, 50 + rand() %75);
     }
     return 1;
 }
